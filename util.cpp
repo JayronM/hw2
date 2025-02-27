@@ -15,18 +15,36 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+set<string> result;
+string word;
 
+istringstream iss(rawWords);
+while(getline(iss, word, ' ')){
+  string current;
 
-
-
-
-
-
-
-
+  for(char c : word){
+    if(ispunct(c)){
+      if (current.size() >= 2){
+        result.insert(convToLower(current));
+      }
+      current.clear();
+    } else{
+      current.push_back(c);
+    }
+  }
+  if(current.size()>=2){
+    result.insert(convToLower(current));
+  }
 
 }
+  return result;
 
+}
+std::set<std::string> setUnion(const std::set<std::string>& set1, const std::set<std::string>& set2){
+  std::set<std::string> result=set1;
+  result.insert(set2.begin(), set2.end());
+  return result;
+}
 /**************************************************
  * COMPLETED - You may use the following functions
  **************************************************/
